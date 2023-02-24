@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>質問ページ</title>
+</head>
+<body>
+<h1>説明</h1>
+  
+    <h2>質問1</h2>
+    <p>英訳1</p>
+    <input type="radio" name="answer1" id="answer1-1" onclick="checkAnswer(1, 'OK')" checked>
+    <label for="answer1-1">OK</label><br>
+    <input type="radio" name="answer1" id="answer1-2" onclick="checkAnswer(1, '？')">
+    <label for="answer1-2">？</label><br>
+    <input type="radio" name="answer1" id="answer1-3" onclick="checkAnswer(1, 'NG')">
+    <label for="answer1-3">NG</label><br>
+    <div id="result1" style="display: none;">
+      <p>正しい答えを入力してください。</p>
+      <input type="text" id="answer1">
+    </div>
+
+    <h2>質問2</h2>
+    <p>英訳2</p>
+    <input type="radio" name="answer2" id="answer2-1" onclick="checkAnswer(2, 'OK')" checked>
+    <label for="answer2-1">OK</label><br>
+    <input type="radio" name="answer2" id="answer2-2" onclick="checkAnswer(2, '？')">
+    <label for="answer2-2">？</label><br>
+    <input type="radio" name="answer2" id="answer2-3" onclick="checkAnswer(2, 'NG')">
+    <label for="answer2-3">NG</label><br>
+    <div id="result2" style="display: none;">
+      <p>正しい答えを入力してください。</p>
+      <input type="text" id="answer2">
+    </div>
+
+    <h2>質問3</h2>
+    <p>英訳3</p>
+    <input type="radio" name="answer3" id="answer3-1" onclick="checkAnswer(3, 'OK')" checked>
+    <label for="answer3-1">OK</label><br>
+    <input type="radio" name="answer3" id="answer3-2" onclick="checkAnswer(3, '？')">
+    <label for="answer3-2">？</label><br>
+    <input type="radio" name="answer3" id="answer3-3" onclick="checkAnswer(3, 'NG')">
+    <label for="answer3-3">NG</label><br>
+    <div id="result3" style="display: none;">
+      <p>正しい答えを入力してください。</p>
+      <input type="text" id="answer3">
+    </div>
+  
+  <button onclick="showResult()">結果を表示</button>
+  <button onclick="exportCSV()">結果をCSVで出力</button>
+  <div id="result" style="display: none;">
+    <p>アンケート結果</p>
+    <ul id="answers"></ul>
+    <ul id="texts"></ul>
+  </div>
+
+  <script>
+    var answers = [];
+    function checkAnswer(questionId, answer) {
+      if (answer === 'NG') {
+        document.getElementById('result' + questionId).style.display = 'block';
+      } else {
+        answers.push({
+          questionId: questionId,
+          answer: answer,
+          text: text
+        });
+      }
+    }
+    function showResult() {
+      var resultElement = document.getElementById('result');
+      var answersElement = document.getElementById('answers');
+      var textsElement = document.getElementById('texts');
+      for (var i = 0; i < answers.length; i++) {
+        var answer = answers[i];
+        var answerElement = document.createElement('li');
+        answerElement.textContent = '質問' + answer.questionId + ': ' + answer.answer;
+        answersElement.appendChild(answerElement);
+        var textElement = document.createElement('li');
+        textElement.textContent = '質問' + answer.questionId + 'のテキスト: ' + answer.text;
+        textsElement.appendChild(textElement);
+      }
+      resultElement.style.display = 'block';
+    }
+    function exportCSV() {
+      var csvContent = 'data:text/csv;charset=utf-8,';
+      csvContent += '質問番号,回答\n';
+      for (var i = 0; i < answers.length; i++) {
+        csvContent += answers[i].questionId + ',' + answers[i].answerr + ',' + answers[i].text + '\n';
+      }
+      var encodedUri = encodeURI(csvContent);
+      var link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'answers.csv');
+      link.click();
+    }
+  </script>
+</body>
+</html>
