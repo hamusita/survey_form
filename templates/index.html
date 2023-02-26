@@ -10,8 +10,8 @@
       {% for row in data %}
       <h2>{{ row[1] }}</h2>
       <input type="radio" name="rating{{ row[0] }}" value="1">○
-      <input type="radio" name="rating{{ row[0] }}" value="2">△
-      <input type="radio" name="rating{{ row[0] }}" value="3">×
+      <input type="radio" name="rating{{ row[0] }}" value="2">?
+      <input type="radio" name="rating{{ row[0] }}" value="3" checked>×
       {% endfor %}
       <br>
       <input type="submit" value="Submit">

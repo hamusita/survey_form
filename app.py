@@ -9,30 +9,29 @@ def read_data(filename):
         data = list(reader)
     return data
 
-def write_data(data, filename):
-    with open(filename, 'w', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerows(data)
-
-@app.route("/index")
+@app.route("/")
 def index():
-    return render_template("/index.html")
+    return render_template("index.html", data=text)
+
+@app.route("/thanks", methods=["GET"])
+def nextpage():
+    return render_template("thanks.html")
 
 @app.route('/submit', methods=['POST'])
 def submit():
     ratings = []
-    for i in range(1, len(data) + 1):
+    for i in range(1, len(text)+1):
         rating = request.form.get('rating' + str(i))
         if rating:
             ratings.append(int(rating))
         else:
             ratings.append(0)
-    for i in range(len(data)):
-        data[i].append(ratings[i])
-    write_data(data, 'data.csv')
+    with open("data.csv", 'a+',  encoding='utf_8', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows([ratings])
     return redirect('/thanks')
 
 if __name__ == '__main__':
-    data = read_data('text.csv')
+    text = read_data('text.csv')
     app.run()
 
