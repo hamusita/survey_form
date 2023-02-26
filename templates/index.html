@@ -6,6 +6,17 @@
   </head>
   <body>
     <h1>Survey</h1>
+    <h2>説明 / Description</h2>
+    <p>これは、日本語の文法についての考えに対する調査です / This is a survey of ideas about Japanese grammar</p>
+    <p>以下に表示される日本語の文に対して，以下の3つの内適切だと思うものを選択してください / For the Japanese sentences shown below, please choose the one you think is appropriate out of the following three options</p>
+    <ul>
+      <li>○ : 文法として正しく、意味も伝わる / Grammatically correct and conveys meaning is conveyed</li>
+      <li>? : 文法としては正しくないが(正しいと思わないが)、意味は伝わる / Not grammatically correct (but the meaning is conveyed)</li>
+      <li>× : 文法としては正しくなく、意味も伝わらない / Grammar is not correct and the meaning is not conveyed.</li>
+    </ul>
+    <p>"/"で分けられ複数の文章があるものについては、最も理解しやすい文に対して選択してください / For sentences that are separated by "/" and have multiple sentences, select the sentence that is easiest to understand.</p>
+    <p>すべて選択し終えたあと、submitボタンを押すとデータが送信されます / After you have selected all the sentences, press the submit button to send the data.</p>
+    <p>ご協力よろしくお願いいたします / Thank you for your cooperation!</p>
     <form action="/submit" method="post">
       {% for row in data %}
       <h2>{{ row[1] }}</h2>
