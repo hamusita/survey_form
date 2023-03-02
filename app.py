@@ -33,5 +33,5 @@ def submit():
 
 if __name__ == '__main__':
     text = read_data('sen.csv')
-    app.run()
+    app.run(host='0.0.0.0')
 
