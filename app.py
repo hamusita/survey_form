@@ -32,6 +32,6 @@ def submit():
     return redirect('/thanks')
 
 if __name__ == '__main__':
-    text = read_data('text.csv')
+    text = read_data('sen.csv')
     app.run()
 

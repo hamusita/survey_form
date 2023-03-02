@@ -19,7 +19,7 @@
     <p>ご協力よろしくお願いいたします / Thank you for your cooperation!</p>
     <form action="/submit" method="post">
       {% for row in data %}
-      <h2>{{ row[1] }}</h2>
+      <h2>{{ row[2] }}</h2>
       <input type="radio" name="rating{{ row[0] }}" value="1">○
       <input type="radio" name="rating{{ row[0] }}" value="2">?
       <input type="radio" name="rating{{ row[0] }}" value="3" checked>×
